@@ -1,5 +1,5 @@
 import {useState} from 'react'
-function TaskCreate() {
+function TaskCreate({createFunction}) {
     const [title, setTitle] = useState('');
     const [taskAr, setTaskAr] = useState('');
 
@@ -13,16 +13,20 @@ function TaskCreate() {
 
     const handleSubmit =(event) =>{
         event.preventDefault();
+        createFunction(title,taskAr);
+        setTitle('');
+        setTaskAr('');
+
     }
 
-    console.log(title,taskAr);
+    
     return ( <div className='task-create'>
         <h3>Enter a new task</h3>
         <form className='form'>
             <label className='task-title'>Title</label>
             <input className='task-input' value={title} onChange={handleChange}/>
             <label className='task-title'>Enter the task</label>
-            <textarea value={taskAr} onChange={handleTaskChange} className='task-input' />
+         <textarea className='task-input' value={taskAr} onChange={handleTaskChange}  />
             <button className='button' onClick={handleSubmit}>Add</button>
         </form>
     </div> );
